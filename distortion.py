@@ -25,11 +25,11 @@ class distortion_threshold(overdrive_sigmoid):
         super(distortion_threshold, self).__init__(n_sine)
 
         self.name = "Distortion Threshold Method"
-        self.threshold = 0.05
+        self.threshold = 0.4
         return
 
     def process(self, sample):
-        super(distortion_threshold, self).process(sample)
+        sample = super(distortion_threshold, self).process(sample)
         if abs(sample) > self.threshold:
             sample = sample / abs(sample) * self.threshold
         return sample
@@ -51,7 +51,7 @@ class distortion_amplification(overdrive_sigmoid):
         return
 
     def process(self, sample):
-        super(distortion_amplification, self).process(sample)
+        sample = super(distortion_amplification, self).process(sample)
         sample = sample * self.gain
         if abs(sample) > 1:
             sample = sample / abs(sample)
