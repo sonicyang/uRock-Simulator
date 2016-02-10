@@ -40,6 +40,7 @@ class simulation(object):
 
         self.ax.legend(handles=[processed, original] + self.legends)
         self.ax.set_title(self.name)
+        self.ax.axhline(0, color='k')
         self.figure.show()
 
 

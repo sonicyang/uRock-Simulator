@@ -37,3 +37,23 @@ class distortion_amplification(simbase.simulation):
 
     def post_simulation(self):
         return
+
+class distortion_sigmoid(simbase.simulation):
+    def __init__(self, n_sine):
+        super(distortion_sigmoid, self).__init__(n_sine)
+
+        self.name = "Distortion Sigmoid Method"
+        self.gain = 10
+        self.sigmoid_function = self.fast_sigmoid
+        return
+
+    def process(self, sample):
+        sample = sample * self.gain
+
+        return self.fast_sigmoid(sample)
+
+    def post_simulation(self):
+        return
+
+    def fast_sigmoid(self, sample):
+        return sample / (1 + abs(sample))
