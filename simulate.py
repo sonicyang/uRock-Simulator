@@ -1,8 +1,10 @@
 import distortion
 
-distor = distortion.distortion(2)
+distor1 = distortion.distortion_threshold(2)
+distor2 = distortion.distortion_amplification(2)
 
-distor.simulate()
+distor1.simulate()
+distor2.simulate()
 
 try:
     input("Press Enter to continue...")
