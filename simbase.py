@@ -22,10 +22,14 @@ class simulation(object):
 
         wavfile.write(self.name + '.wav', sampFreq, snd)
 
-        self.timebase = np.linspace(-self.n_sine * np.pi, self.n_sine * np.pi, self.n_sine * 1500)
+        if self.random:
+            self.timebase = np.linspace(0, self.n_sine * 1500 , self.n_sine * 1500)
+            pure_samples = np.random.sample(self.n_sine * 1500)
+        else:
+            self.timebase = np.linspace(-self.n_sine * np.pi, self.n_sine * np.pi, self.n_sine * 1500)
+            pure_samples = np.sin(self.timebase)
 
-        pure_samples = np.sin(self.timebase)
-        samples = np.sin(self.timebase)
+        samples = np.copy(pure_samples)
 
         for (index,), value in np.ndenumerate(samples):
             samples[index] = self.process(value)
@@ -33,8 +37,8 @@ class simulation(object):
         self.figure = plt.figure()
         self.ax = self.figure.add_subplot(111)
 
-        processed, = self.ax.plot(self.timebase, samples, label='Processed')
         original, = self.ax.plot(self.timebase, pure_samples, label='Original')
+        processed, = self.ax.plot(self.timebase, samples, label='Processed')
 
         self.post_simulation()
 
