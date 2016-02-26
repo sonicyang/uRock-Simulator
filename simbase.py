@@ -22,7 +22,7 @@ class simulation(object):
 
         wavfile.write(self.name + '.wav', sampFreq, snd)
 
-        self.timebase = np.linspace(-self.n_sine * np.pi, self.n_sine * np.pi, 3000)
+        self.timebase = np.linspace(-self.n_sine * np.pi, self.n_sine * np.pi, self.n_sine * 1500)
 
         pure_samples = np.sin(self.timebase)
         samples = np.sin(self.timebase)
